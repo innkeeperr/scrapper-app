@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "19b1ef45-71d5-4d3a-aacf-0f3a86ed9d3c",
+		"name": "WebScrapperAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14061550"
+	},
+	"item": [
+		{
+			"name": "Scrape",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"url\": \"https://www.amazon.pl/s?k=berserk&__mk_pl_PL=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2HU6F454CVNRX&sprefix=berserk%2Caps%2C172&ref=nb_sb_noss_1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/scrape",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"scrape"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
