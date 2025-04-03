@@ -11,7 +11,6 @@
 
 <script setup lang="ts">
 import { Form } from '@primevue/forms';
-import Button from 'primevue/button';
 import { reactive } from 'vue';
 
 const initialValues = reactive({

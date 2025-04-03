@@ -7,10 +7,6 @@
   </template>
   
   <script setup lang="ts">  
-  import InputText from 'primevue/inputtext';
-import Message from 'primevue/message';
-import FloatLabel from 'primevue/floatlabel'
-
   const props = defineProps<{
     label: string
     name: string
