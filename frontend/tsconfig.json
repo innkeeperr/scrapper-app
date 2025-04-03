@@ -1,5 +1,5 @@
 {
-  "files": [],
+  "files": ["components.d.ts"],
   "references": [
     {
       "path": "./tsconfig.node.json"

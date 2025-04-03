@@ -10,11 +10,9 @@
 </template>
 
 <script setup lang="ts">
-import InputText from 'primevue/inputtext';
 import { Form } from '@primevue/forms';
 import Button from 'primevue/button';
 import { reactive } from 'vue';
-import InputTextField from './InputTextField.vue'
 
 const initialValues = reactive({
     itemList: '',
