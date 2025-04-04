@@ -11,7 +11,9 @@
 
 <script setup lang="ts">
 import { Form } from '@primevue/forms';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
+import { zodResolver } from '@primevue/forms/resolvers/zod';
+import { z } from 'zod';
 
 const initialValues = reactive({
     itemList: '',
@@ -20,22 +22,12 @@ const initialValues = reactive({
     link: ''
 });
 
-const resolver = ({ values }) => {
-    const errors = {};
-
-    if (!values.itemList) {
-        errors.itemList = [{ message: 'Item is required.' }];
-    }
-
-    if (!values.price) {
-        errors.price = [{ message: 'Price is required.' }];
-    }
-
-    return {
-        values, // (Optional) Used to pass current form values to submit event.
-        errors
-    };
-};
+const resolver = ref(zodResolver(
+    z.object({
+        itemList: z.string().min(1, { message: 'Item list is required.' }),
+        price: z.string().min(1, { message: 'Price is required.' })
+    })
+));
 
 const onFormSubmit = () => {}
 
