@@ -1,7 +1,9 @@
 <template>
-    <Form v-slot="$form" :initialValues :resolver @submit="onFormSubmit" class="flex flex-col gap-6 w-full sm:w-56">
+    <Form v-slot="$form" :initialValues :resolver @submit="onFormSubmit" class="flex flex-col gap-6 w-full">
         <label class="text-xl text-center">Selectors for scraping</label>
+        <InputTextField label="search URL" name="searchUrl" :errorMessage="$form.searchUrl?.error?.message" :invalid="$form.searchUrl?.invalid" />
         <InputTextField label="item list" name="itemList" :errorMessage="$form.itemList?.error?.message" :invalid="$form.itemList?.invalid" />
+        <InputTextField label="product title" name="title" :errorMessage="$form.title?.error?.message" :invalid="$form.title?.invalid" />
         <InputTextField label="price" name="price" :errorMessage="$form.price?.error?.message" :invalid="$form.price?.invalid" />
         <InputTextField label="price fraction" name="priceFraction" :errorMessage="$form.priceFraction?.error?.message" :invalid="$form.priceFraction?.invalid" />
         <InputTextField label="link" name="link" :errorMessage="$form.link?.error?.message" :invalid="$form.link?.invalid" />
@@ -16,7 +18,9 @@ import { zodResolver } from '@primevue/forms/resolvers/zod';
 import { z } from 'zod';
 
 const initialValues = reactive({
+    searchUrl: '',
     itemList: '',
+    title: '',
     price: '',
     priceFraction: '',
     link: ''
@@ -24,8 +28,12 @@ const initialValues = reactive({
 
 const resolver = ref(zodResolver(
     z.object({
+        searchUrl: z.string().min(1, { message: 'Search URL is required.' }),
         itemList: z.string().min(1, { message: 'Item list is required.' }),
-        price: z.string().min(1, { message: 'Price is required.' })
+        title: z.string().min(1, { message: 'Product title is required.' }),
+        price: z.string().min(1, { message: 'Price is required.' }),
+        priceFraction: z.string(),
+        link: z.string()
     })
 ));
 
