@@ -1,7 +1,7 @@
 const cheerio = require("cheerio");
 const axios = require("axios");
 const router = require("express").Router();
-const { generateFilename, saveProductJson, generateTitle } = require("./utils");
+const { generateTitle } = require("./utils");
 const Product = require("./models/Product");
 
 const baseUrl = "https://www.amazon.pl";
@@ -14,7 +14,13 @@ router.post("/scrape", async (req, res) => {
   }
 
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+        "Accept-Language": "pl-PL,pl;q=0.9,en-US;q=0.8,en;q=0.7",
+      },
+    });
     const $ = cheerio.load(response.data);
     const products = [];
     $(".s-result-item").each((i, el) => {
@@ -35,11 +41,10 @@ router.post("/scrape", async (req, res) => {
     res.json({
       products_saved: products.length,
       message: "Products scraped and saved to Mongo",
-      filename: generateFilename(),
     });
   } catch (error) {
     console.error("Scraping error:", error);
-    res.statusCode(500).json({
+    res.status(500).json({
       message: "Error scraping products",
       error: error.message,
     });
