@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"url\": \"https://www.amazon.pl/s?k=berserk&__mk_pl_PL=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2HU6F454CVNRX&sprefix=berserk%2Caps%2C172&ref=nb_sb_noss_1\"\r\n}",
+					"raw": "{\r\n  \"url\": \"https://www.amazon.pl/s?k=berserk+figure&__mk_pl_PL=%C3%85M%C3%85%C5%BD%C3%95%C3%91\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,14 +21,44 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/scrape",
+					"raw": "http://localhost:3000/api/scrape",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
+						"api",
 						"scrape"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add scraperConfig",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"baseUrl\": \"https://test\",\r\n  \"itemList\": \".product-list-item\",\r\n  \"title\": \".product-title\",\r\n  \"price\": \".product-price\",\r\n  \"priceFraction\": \".price-fraction\",\r\n  \"link\": \".product-link\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/scraper-config",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"scraper-config"
 					]
 				}
 			},
