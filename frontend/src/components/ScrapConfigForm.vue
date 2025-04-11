@@ -12,13 +12,14 @@
 </template>
 
 <script setup lang="ts">
-import { Form } from '@primevue/forms';
+import { Form, type FormSubmitEvent } from '@primevue/forms';
 import { reactive, ref } from 'vue';
 import { zodResolver } from '@primevue/forms/resolvers/zod';
-import { z } from 'zod';
+import { scraperApi } from '@/services/api/scraperApi';
+import { scraperConfigSchema, type ScraperConfigSchemaType } from '@/schemas/scraperConfigSchema';
 
 const initialValues = reactive({
-    baseUrl: '',
+    baseUrl: 'test',
     itemList: '',
     title: '',
     price: '',
@@ -26,18 +27,13 @@ const initialValues = reactive({
     link: ''
 });
 
-const resolver = ref(zodResolver(
-    z.object({
-        baseUrl: z.string().min(1, { message: 'Base URL is required.' }),
-        itemList: z.string().min(1, { message: 'Item list is required.' }),
-        title: z.string().min(1, { message: 'Product title is required.' }),
-        price: z.string().min(1, { message: 'Price is required.' }),
-        priceFraction: z.string().optional(),
-        link: z.string().optional()
-    })
-));
+const resolver = ref(zodResolver(scraperConfigSchema));
 
-const onFormSubmit = () => {}
+const onFormSubmit = ({values, valid}: FormSubmitEvent<ScraperConfigSchemaType>) => {
+    if(valid) {
+        scraperApi.createScraperConfig(values)
+    }
+}
 
 </script>
 
