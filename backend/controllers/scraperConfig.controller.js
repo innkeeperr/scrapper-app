@@ -18,3 +18,13 @@ exports.createScraperConfig = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+exports.getAllScraperConfigs = async (req, res) => {
+  try {
+    const configs = await ScraperConfig.find();
+    return res.status(200).json(configs);
+  } catch (err) {
+    console.error("[GET /scraper-config] Error:", err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
