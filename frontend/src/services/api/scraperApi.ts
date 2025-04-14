@@ -3,10 +3,15 @@ import { api } from './axios'
 
 const createScraperConfig = async (data: ScraperConfigSchemaType) => {
   const response = await api.post('/scraper-config', data)
-  console.log(response)
   return response
+}
+
+const fetchAllScraperConfigs = async () => {
+  const response = await api.get('/scraper-config')
+  return response.data
 }
 
 export const scraperApi = {
   createScraperConfig,
+  fetchAllScraperConfigs,
 }
