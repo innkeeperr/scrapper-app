@@ -2,7 +2,7 @@
     <nav>
         <NavigatorBar />
     </nav>
-    <main>
+    <main class="py-4 px-1">
         <RouterView />
     </main>
 </template>
