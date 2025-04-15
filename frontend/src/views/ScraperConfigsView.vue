@@ -29,6 +29,8 @@ onMounted(async () => {
 
 // const dialog = useDialog();
 
+const showAddForm = () => {}
+
 // const showAddForm = () => {
 //     const dialogRef = dialog.open(ScrapConfigForm, {
 //         props: {
