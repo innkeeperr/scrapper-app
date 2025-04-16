@@ -1,6 +1,5 @@
 <template>
     <Form v-slot="$form" :initialValues :resolver @submit="onFormSubmit" class="flex flex-col gap-6 w-full">
-        <label class="text-xl text-center">Selectors for scraping</label>
         <InputTextField label="base URL" name="baseUrl" :errorMessage="$form.baseUrl?.error?.message" :invalid="$form.searchUrl?.invalid" />
         <InputTextField label="item list" name="itemList" :errorMessage="$form.itemList?.error?.message" :invalid="$form.itemList?.invalid" />
         <InputTextField label="product title" name="title" :errorMessage="$form.title?.error?.message" :invalid="$form.title?.invalid" />
@@ -19,7 +18,7 @@ import { scraperApi } from '@/services/api/scraperApi';
 import { scraperConfigSchema, type ScraperConfigSchemaType } from '@/schemas/scraperConfigSchema';
 
 const initialValues = reactive({
-    baseUrl: 'test',
+    baseUrl: '',
     itemList: '',
     title: '',
     price: '',
@@ -34,9 +33,4 @@ const onFormSubmit = ({values, valid}: FormSubmitEvent<ScraperConfigSchemaType>)
         scraperApi.createScraperConfig(values)
     }
 }
-
 </script>
-
-<style scoped>
-
-</style>
