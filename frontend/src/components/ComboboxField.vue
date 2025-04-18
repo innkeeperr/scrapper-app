@@ -1,7 +1,7 @@
 <template>
     <FloatLabel class="relative" variant="in">
-        <AutoComplete name="country.name" optionLabel="name" :suggestions="filteredCountries" @complete="search" />
-        <label for="country.name">{{ props.label }}</label>
+        <AutoComplete :name="name" :optionLabel="label" :suggestions="filteredItems" @complete="search" />
+        <label :for="name">{{ props.label }}</label>
         <Message class="absolute bottom-[-22px] left-[14px]" v-if="invalid" severity="error" size="small" variant="simple">{{ errorMessage }}</Message>
     </FloatLabel>  
 </template>
@@ -13,30 +13,22 @@ import { ref } from 'vue';
 const props = defineProps<{
 label: string
 name: string
+items: {name: string, value: string}[]
 errorMessage?: string
 invalid?: boolean
 }>();
 
 
-const selectedCountry = ref();
-const filteredCountries = ref();
-const countries = ref([{
-    name: "Poland",
-    value: "poland" 
-},
-{
-    name: "Gondor",
-    value: "gondor" 
-}]
-);
+const selectedValue = ref();
+const filteredItems = ref();
 
 const search = (event) => {
     setTimeout(() => {
         if (!event.query.trim().length) {
-            filteredCountries.value = [...countries.value];
+            filteredItems.value = [...props.items];
         } else {
-            filteredCountries.value = countries.value.filter((country) => {
-                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+            filteredItems.value = props.items.filter((item) => {
+                return item.name.toLowerCase().startsWith(event.query.toLowerCase());
             });
         }
     }, 250);
