@@ -23,6 +23,10 @@ const items = ref([
         route: '/'
     },
     {
+        label: 'Product configs',
+        route: '/product-configs'
+    },
+    {
         label: 'Scraper configs',
         route: '/scraper-configs'
     },

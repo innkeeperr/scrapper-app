@@ -1,9 +1,9 @@
 <template>
     <div class="mb-2">
-        <Button label="Add configuration" icon="pi pi-search" @click="showAddForm" />
+        <Button label="Add product" icon="pi pi-search" @click="showAddForm" />
     </div>
     
-    <DataTable :value="scraperConfigs" tableStyle="min-width: 50rem">
+    <DataTable :value="[]" tableStyle="min-width: 50rem">
         <Column field="baseUrl" header="Base URL"></Column>
         <Column field="title" header="Title"></Column>
         <Column field="createdAt" header="Created At"></Column>
@@ -17,26 +17,18 @@
 </template>
 
 <script setup lang="ts">
-import { scraperApi } from '@/services/api/scraperApi';
 import { defineAsyncComponent, onMounted, ref } from 'vue';
 import { useDialog } from 'primevue/usedialog';
-const ScrapConfigForm = defineAsyncComponent(() => import('../components/ScraperConfigForm.vue'));
 const ProductConfigForm = defineAsyncComponent(() => import('../components/ProductConfigForm.vue'));
-
-const scraperConfigs = ref()
-
-onMounted(async () => {
-    scraperConfigs.value = await scraperApi.fetchAllScraperConfigs()
-});
 
 const dialog = useDialog();
 
 const showAddForm = () => {
-    const dialogRef = dialog.open(ScrapConfigForm, {
+    const dialogRef = dialog.open(ProductConfigForm, {
         props: {
-            header: 'New scraper configuration',
+            header: 'New product configuration',
             style: {
-                width: '50vw',
+                width: '25vw',
             },
             breakpoints:{
                 '960px': '75vw',

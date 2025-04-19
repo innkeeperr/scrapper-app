@@ -1,6 +1,6 @@
 <template>
     <FloatLabel class="relative" variant="in">
-        <AutoComplete :name="name" :optionLabel="label" :suggestions="filteredItems" @complete="search" />
+        <AutoComplete dropdown :name="name" optionLabel="name" :suggestions="filteredItems" @complete="search" class="w-full" />
         <label :for="name">{{ props.label }}</label>
         <Message class="absolute bottom-[-22px] left-[14px]" v-if="invalid" severity="error" size="small" variant="simple">{{ errorMessage }}</Message>
     </FloatLabel>  
@@ -18,8 +18,6 @@ errorMessage?: string
 invalid?: boolean
 }>();
 
-
-const selectedValue = ref();
 const filteredItems = ref();
 
 const search = (event) => {
