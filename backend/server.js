@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const scrapeProducts = require("./scraper");
 const scraperConfigRoutes = require("./routes/scraperConfig.routes");
+const productConfigRoutes = require("./routes/productConfig.routes");
 const cors = require("cors");
 require("./mongo");
 
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 
 app.use("/api", scrapeProducts);
 app.use("/api", scraperConfigRoutes);
+app.use("/api", productConfigRoutes);
 
 server = app.listen(port, () => console.log("Server running on port 3000"));
 

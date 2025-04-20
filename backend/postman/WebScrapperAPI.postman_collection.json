@@ -63,6 +63,55 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Fetch all scraper configs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/scraper-config",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"scraper-config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add productConfig",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productName\": \"Dark souls 4\",\r\n    \"maxPrice\": 500,\r\n    \"scraperConfigId\": \"67f6e6ce7970e456497ded81\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/product-config",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"product-config"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -21,7 +21,6 @@ import { scraperApi } from '@/services/api/scraperApi';
 import { defineAsyncComponent, onMounted, ref } from 'vue';
 import { useDialog } from 'primevue/usedialog';
 const ScrapConfigForm = defineAsyncComponent(() => import('../components/ScraperConfigForm.vue'));
-const ProductConfigForm = defineAsyncComponent(() => import('../components/ProductConfigForm.vue'));
 
 const scraperConfigs = ref()
 
