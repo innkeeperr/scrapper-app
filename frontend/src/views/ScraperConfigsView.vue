@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { scraperApi } from '@/services/api/scraperApi';
+import { scraperConfigApi } from '@/services/api/scraperConfigApi';
 import { defineAsyncComponent, onMounted, ref } from 'vue';
 import { useDialog } from 'primevue/usedialog';
 const ScrapConfigForm = defineAsyncComponent(() => import('../components/ScraperConfigForm.vue'));
@@ -25,7 +25,7 @@ const ScrapConfigForm = defineAsyncComponent(() => import('../components/Scraper
 const scraperConfigs = ref()
 
 onMounted(async () => {
-    scraperConfigs.value = await scraperApi.fetchAllScraperConfigs()
+    scraperConfigs.value = await scraperConfigApi.fetchAllScraperConfigs()
 });
 
 const dialog = useDialog();

@@ -14,7 +14,7 @@
 import { Form, type FormSubmitEvent } from '@primevue/forms';
 import { reactive, ref } from 'vue';
 import { zodResolver } from '@primevue/forms/resolvers/zod';
-import { scraperApi } from '@/services/api/scraperApi';
+import { scraperConfigApi } from '@/services/api/scraperConfigApi';
 import { scraperConfigSchema, type ScraperConfigSchemaType } from '@/schemas/scraperConfigSchema';
 
 const initialValues = reactive({
@@ -30,7 +30,7 @@ const resolver = ref(zodResolver(scraperConfigSchema));
 
 const onFormSubmit = ({values, valid}: FormSubmitEvent<ScraperConfigSchemaType>) => {
     if(valid) {
-        scraperApi.createScraperConfig(values)
+        scraperConfigApi.createScraperConfig(values)
     }
 }
 </script>

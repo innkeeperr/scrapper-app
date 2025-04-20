@@ -11,7 +11,7 @@ const fetchAllScraperConfigs = async () => {
   return response.data
 }
 
-export const scraperApi = {
+export const scraperConfigApi = {
   createScraperConfig,
   fetchAllScraperConfigs,
 }
