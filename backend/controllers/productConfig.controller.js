@@ -4,9 +4,9 @@ const mongoose = require("mongoose");
 
 exports.createProductConfig = async (req, res) => {
   try {
-    const { productName, maxPrice, scraperConfigId } = req.body;
+    const { productName, maxPrice, scraperConfigId, searchUrl } = req.body;
 
-    if (!productName || !scraperConfigId) {
+    if (!productName || !scraperConfigId || !searchUrl) {
       return res
         .status(400)
         .json({ error: "All required data was not provided" });
@@ -28,6 +28,7 @@ exports.createProductConfig = async (req, res) => {
       productName,
       scraperConfigId,
       maxPrice,
+      searchUrl,
     });
 
     await newProductConfig.save();

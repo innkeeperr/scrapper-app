@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 const productConfigSchema = new mongoose.Schema(
   {
+    searchUrl: { type: String, required: true },
     productName: { type: String, required: true },
     maxPrice: { type: Number },
     scraperConfigId: {

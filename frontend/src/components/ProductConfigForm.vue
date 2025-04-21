@@ -1,6 +1,7 @@
 <template>
     <Form v-slot="$form" :initialValues :resolver @submit="onFormSubmit" class="flex flex-col gap-6 w-full">
         <AutocompleteField label="scraper config" name="scraperConfig" :items="items" :errorMessage="$form.scraperConfig?.error?.message" :invalid="$form.scraperConfig?.invalid" />
+        <InputTextField label="product url" name="searchUrl" :errorMessage="$form.searchUrl?.error?.message" :invalid="$form.searchUrl?.invalid" />
         <InputTextField label="product name" name="productName" :errorMessage="$form.productName?.error?.message" :invalid="$form.productName?.invalid" />
         <InputNumberField label="max price" name="maxPrice" :errorMessage="$form.maxPrice?.error?.message" :invalid="$form.maxPrice?.invalid" />
         <Button label="Submit" type="submit" />
@@ -15,6 +16,7 @@ import { productConfigSchema, type ProductConfigSchemaType } from '@/schemas/pro
 import type { FormSubmitEvent } from '@primevue/forms';
 import { onMounted } from 'vue';
 import { scraperConfigApi } from '@/services/api/scraperConfigApi';
+import { productConfigApi, type CreateProductConfigPayload } from '@/services/api/productConfigApi';
 
 const items = ref<{name: string, value: string}[]>([])
 
@@ -33,8 +35,13 @@ const resolver = ref(zodResolver(productConfigSchema));
 
 const onFormSubmit = ({values, valid }: FormSubmitEvent<ProductConfigSchemaType>) => {
     if (valid) {
-        console.log('product config valid')
-        console.log('values', values)
+        const requestPayload: CreateProductConfigPayload = {
+            productName: values.productName,
+            searchUrl: values.searchUrl,
+            maxPrice: values.maxPrice,
+            scraperConfigId: values.scraperConfig.value
+        }
+        productConfigApi.createProductConfig(requestPayload)
     }
 };
 

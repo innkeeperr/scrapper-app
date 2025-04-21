@@ -1,7 +1,11 @@
 import type { ProductConfigSchemaType } from '@/schemas/productConfigSchema'
 import { api } from './axios'
 
-const createProductConfig = async (data: ProductConfigSchemaType) => {
+export interface CreateProductConfigPayload extends Omit<ProductConfigSchemaType, 'scraperConfig'> {
+  scraperConfigId: string
+}
+
+const createProductConfig = async (data: CreateProductConfigPayload) => {
   const response = await api.post('/product-config', data)
   return response
 }
