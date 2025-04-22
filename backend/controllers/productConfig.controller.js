@@ -38,3 +38,13 @@ exports.createProductConfig = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+exports.getAllProductConfigs = async (req, res) => {
+  try {
+    const configs = await ProductConfig.find();
+    return res.status(200).json(configs);
+  } catch (err) {
+    console.error("[GET /product-config] Error:", err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};

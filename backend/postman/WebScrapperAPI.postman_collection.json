@@ -112,6 +112,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Fetch all product configs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/product-config",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"product-config"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
