@@ -3,14 +3,12 @@
         <Button label="Add product" icon="pi pi-search" @click="showAddForm" />
     </div>
     
-    <DataTable :value="[]" tableStyle="min-width: 50rem">
-        <Column field="baseUrl" header="Base URL"></Column>
-        <Column field="title" header="Title"></Column>
+    <DataTable :value="productConfigs" tableStyle="min-width: 50rem">
+        <Column field="searchUrl" header="Search URL"></Column>
+        <Column field="productName" header="Product Name"></Column>
         <Column field="createdAt" header="Created At"></Column>
-        <Column field="itemList" header="Item list"></Column>
-        <Column field="link" header="Link"></Column>
-        <Column field="price" header="Price"></Column>
-        <Column field="priceFraction" header="Price Fraction"></Column>
+        <Column field="maxPrice" header="Max price"></Column>
+        <Column field="scraperConfigId" header="Scraper configuration ID"></Column>
     </DataTable>
     <DynamicDialog />
  
@@ -19,7 +17,14 @@
 <script setup lang="ts">
 import { defineAsyncComponent, onMounted, ref } from 'vue';
 import { useDialog } from 'primevue/usedialog';
+import { productConfigApi } from '@/services/api/productConfigApi';
 const ProductConfigForm = defineAsyncComponent(() => import('../components/ProductConfigForm.vue'));
+
+const productConfigs = ref()
+
+onMounted(async () => {
+    productConfigs.value = await productConfigApi.fetchAllProductConfigs()
+});
 
 const dialog = useDialog();
 

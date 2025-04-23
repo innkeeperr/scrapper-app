@@ -10,6 +10,12 @@ const createProductConfig = async (data: CreateProductConfigPayload) => {
   return response
 }
 
+const fetchAllProductConfigs = async () => {
+  const response = await api.get('/product-config')
+  return response.data
+}
+
 export const productConfigApi = {
   createProductConfig,
+  fetchAllProductConfigs,
 }
