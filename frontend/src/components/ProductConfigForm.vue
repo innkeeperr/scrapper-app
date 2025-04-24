@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { zodResolver } from '@primevue/forms/resolvers/zod';
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 import AutocompleteField from './AutocompleteField.vue';
 import { productConfigSchema, type ProductConfigSchemaType } from '@/schemas/productConfigSchema';
 import type { FormSubmitEvent } from '@primevue/forms';
@@ -33,6 +33,8 @@ const initialValues = ref({
 
 const resolver = ref(zodResolver(productConfigSchema));
 
+const dialogRef = inject('dialogRef');
+
 const onFormSubmit = ({values, valid }: FormSubmitEvent<ProductConfigSchemaType>) => {
     if (valid) {
         const requestPayload: CreateProductConfigPayload = {
@@ -42,6 +44,8 @@ const onFormSubmit = ({values, valid }: FormSubmitEvent<ProductConfigSchemaType>
             scraperConfigId: values.scraperConfig.value
         }
         productConfigApi.createProductConfig(requestPayload)
+
+        dialogRef.value.close();
     }
 };
 

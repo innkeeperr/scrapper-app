@@ -20,6 +20,7 @@ import { useDialog } from 'primevue/usedialog';
 import { productConfigApi } from '@/services/api/productConfigApi';
 const ProductConfigForm = defineAsyncComponent(() => import('../components/ProductConfigForm.vue'));
 
+
 const productConfigs = ref()
 
 onMounted(async () => {
