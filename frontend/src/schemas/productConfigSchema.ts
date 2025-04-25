@@ -9,7 +9,7 @@ export const productConfigSchema = z.object({
   ]),
   searchUrl: z.string().min(1, 'Search URL is required'),
   productName: z.string().min(1, 'Product name is required'),
-  maxPrice: z.number(),
+  maxPrice: z.number().nullable(),
 })
 
 export type ProductConfigSchemaType = Zod.infer<typeof productConfigSchema>

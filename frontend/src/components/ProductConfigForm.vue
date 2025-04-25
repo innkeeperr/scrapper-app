@@ -27,15 +27,14 @@ onMounted(async () => {
 
 const initialValues = ref({
     scraperConfig: {name: '', value: ''},
-    productName: '',
-    maxPrice: ''
+    productName: ''
 });
 
 const resolver = ref(zodResolver(productConfigSchema));
 
 const dialogRef = inject('dialogRef');
 
-const onFormSubmit = ({values, valid }: FormSubmitEvent<ProductConfigSchemaType>) => {
+const onFormSubmit = async ({values, valid }: FormSubmitEvent<ProductConfigSchemaType>) => {
     if (valid) {
         const requestPayload: CreateProductConfigPayload = {
             productName: values.productName,
@@ -43,9 +42,11 @@ const onFormSubmit = ({values, valid }: FormSubmitEvent<ProductConfigSchemaType>
             maxPrice: values.maxPrice,
             scraperConfigId: values.scraperConfig.value
         }
-        productConfigApi.createProductConfig(requestPayload)
+        const response = await productConfigApi.createProductConfig(requestPayload)
 
-        dialogRef.value.close();
+        if(response.status === 201) {
+            dialogRef.value.close();
+        }
     }
 };
 
