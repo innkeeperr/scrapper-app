@@ -10,13 +10,14 @@
 
 <script setup lang="ts">
 import { zodResolver } from '@primevue/forms/resolvers/zod';
-import { ref, inject } from 'vue';
+import { ref, inject, type Ref } from 'vue';
 import AutocompleteField from './AutocompleteField.vue';
 import { productConfigSchema, type ProductConfigSchemaType } from '@/schemas/productConfigSchema';
 import type { FormSubmitEvent } from '@primevue/forms';
 import { onMounted } from 'vue';
 import { scraperConfigApi } from '@/services/api/scraperConfigApi';
 import { productConfigApi, type CreateProductConfigPayload } from '@/services/api/productConfigApi';
+import type { DynamicDialogInstance } from 'primevue/dynamicdialogoptions';
 
 const items = ref<{name: string, value: string}[]>([])
 
@@ -32,7 +33,7 @@ const initialValues = ref({
 
 const resolver = ref(zodResolver(productConfigSchema));
 
-const dialogRef = inject('dialogRef');
+const dialogRef = inject<Ref<DynamicDialogInstance>>('dialogRef');
 
 const onFormSubmit = async ({values, valid }: FormSubmitEvent<ProductConfigSchemaType>) => {
     if (valid) {
@@ -45,7 +46,7 @@ const onFormSubmit = async ({values, valid }: FormSubmitEvent<ProductConfigSchem
         const response = await productConfigApi.createProductConfig(requestPayload)
 
         if(response.status === 201) {
-            dialogRef.value.close();
+            dialogRef?.value.close();
         }
     }
 };

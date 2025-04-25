@@ -12,10 +12,11 @@
 
 <script setup lang="ts">
 import { Form, type FormSubmitEvent } from '@primevue/forms';
-import { reactive, ref, inject } from 'vue';
+import { reactive, ref, inject, type Ref } from 'vue';
 import { zodResolver } from '@primevue/forms/resolvers/zod';
 import { scraperConfigApi } from '@/services/api/scraperConfigApi';
 import { scraperConfigSchema, type ScraperConfigSchemaType } from '@/schemas/scraperConfigSchema';
+import type { DynamicDialogInstance } from 'primevue/dynamicdialogoptions';
 
 const initialValues = reactive({
     baseUrl: '',
@@ -28,14 +29,14 @@ const initialValues = reactive({
 
 const resolver = ref(zodResolver(scraperConfigSchema));
 
-const dialogRef = inject('dialogRef');
+const dialogRef = inject<Ref<DynamicDialogInstance>>('dialogRef');
 
 const onFormSubmit = async ({values, valid}: FormSubmitEvent<ScraperConfigSchemaType>) => {
     if(valid) {
         const response = await scraperConfigApi.createScraperConfig(values)
         
         if(response.status === 201) {
-            dialogRef.value.close();
+            dialogRef?.value.close();
         }
     }
 }
