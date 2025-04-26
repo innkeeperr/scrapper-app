@@ -1,7 +1,6 @@
 const cheerio = require("cheerio");
 const axios = require("axios");
 const router = require("express").Router();
-const { generateTitle } = require("./utils");
 const Product = require("./models/Product");
 const ProductConfig = require("./models/ProductConfig");
 
@@ -11,8 +10,6 @@ router.post("/scrape", async (req, res) => {
   const productConfig = await ProductConfig.findById(productConfigId)
     .populate("scraperConfigId")
     .exec();
-
-  console.log("productConfig", productConfig);
 
   if (
     !productConfig.searchUrl.includes(productConfig.scraperConfigId.baseUrl)
@@ -31,13 +28,19 @@ router.post("/scrape", async (req, res) => {
     });
     const $ = cheerio.load(response.data);
     const products = [];
-    $(".s-result-item").each((i, el) => {
+    $(productConfig.scraperConfigId.itemList).each((i, el) => {
       const product = $(el);
-      const priceWhole = product.find(".a-price-whole").text();
-      const priceFraction = product.find(".a-price-fraction").text();
+      const priceWhole = product
+        .find(productConfig.scraperConfigId.price)
+        .text();
+      const priceFraction = product
+        .find(productConfig.scraperConfigId.priceFraction)
+        .text();
       const price = priceWhole + priceFraction;
-      const link = product.find(".a-link-normal.a-text-normal").attr("href");
-      const title = generateTitle(product, link);
+      const link = product
+        .find(productConfig.scraperConfigId.link)
+        .attr("href");
+      const title = product.find(productConfig.scraperConfigId.title).text();
 
       if (title !== "" && price !== "" && link !== "") {
         products.push({ title, price, link });
