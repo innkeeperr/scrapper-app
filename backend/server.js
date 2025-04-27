@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const scrapeProducts = require("./scraper");
 const scraperConfigRoutes = require("./routes/scraperConfig.routes");
 const productConfigRoutes = require("./routes/productConfig.routes");
+const scraperRoutes = require("./routes/scraper.routes");
 const cors = require("cors");
 require("./mongo");
 
@@ -19,7 +19,7 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use("/api", scrapeProducts);
+app.use("/api", scraperRoutes);
 app.use("/api", scraperConfigRoutes);
 app.use("/api", productConfigRoutes);
 

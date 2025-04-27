@@ -42,7 +42,6 @@ const showAddForm = () => {
             },
             modal: true
         },
-
         onClose: (options) => {
         }
     });

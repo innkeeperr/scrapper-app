@@ -1,13 +1,17 @@
 const mongoose = require("mongoose");
 
+const createFieldSchema = ({ required }) => ({
+  selector: { type: String, required: true },
+  attribute: { type: String, required: true, default: "text" },
+});
+
 const scraperConfigSchema = new mongoose.Schema(
   {
     baseUrl: { type: String, required: true },
-    itemList: { type: String, required: true },
-    title: { type: String, required: true },
-    price: { type: String, required: true },
-    priceFraction: { type: String },
-    link: { type: String },
+    title: createFieldSchema({ required: true }),
+    price: createFieldSchema({ required: true }),
+    priceFraction: createFieldSchema({ required: false }),
+    link: createFieldSchema({ required: true }),
   },
   {
     timestamps: true,
