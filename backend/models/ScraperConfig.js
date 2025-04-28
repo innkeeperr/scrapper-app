@@ -10,7 +10,6 @@ const scraperConfigSchema = new mongoose.Schema(
     baseUrl: { type: String, required: true },
     title: createFieldSchema({ required: true }),
     price: createFieldSchema({ required: true }),
-    priceFraction: createFieldSchema({ required: false }),
     link: createFieldSchema({ required: true }),
   },
   {

@@ -1,11 +1,9 @@
 <template>
     <Form v-slot="$form" :initialValues :resolver @submit="onFormSubmit" class="flex flex-col gap-6 w-full">
-        <InputTextField label="base URL" name="baseUrl" :errorMessage="$form.baseUrl?.error?.message" :invalid="$form.searchUrl?.invalid" />
-        <InputTextField label="item list" name="itemList" :errorMessage="$form.itemList?.error?.message" :invalid="$form.itemList?.invalid" />
-        <InputTextField label="product title" name="title" :errorMessage="$form.title?.error?.message" :invalid="$form.title?.invalid" />
-        <InputTextField label="price" name="price" :errorMessage="$form.price?.error?.message" :invalid="$form.price?.invalid" />
-        <InputTextField label="price fraction" name="priceFraction" :errorMessage="$form.priceFraction?.error?.message" :invalid="$form.priceFraction?.invalid" />
-        <InputTextField label="link" name="link" :errorMessage="$form.link?.error?.message" :invalid="$form.link?.invalid" />
+        <InputTextField label="base URL" name="baseUrl" :errorMessage="$form.baseUrl?.error?.message" :invalid="$form.baseUrl?.invalid" />
+        <InputTextField label="product title" name="titleSelector" :errorMessage="$form.titleSelector?.error?.message" :invalid="$form.titleSelector?.invalid" />
+        <InputTextField label="price" name="priceSelector" :errorMessage="$form.priceSelector?.error?.message" :invalid="$form.priceSelector?.invalid" />
+        <InputTextField label="link" name="linkSelector" :errorMessage="$form.linkSelector?.error?.message" :invalid="$form.linkSelector?.invalid" />
         <Button label="Submit" type="submit" />
     </Form>
 </template>
@@ -20,11 +18,9 @@ import type { DynamicDialogInstance } from 'primevue/dynamicdialogoptions';
 
 const initialValues = reactive({
     baseUrl: '',
-    itemList: '',
-    title: '',
-    price: '',
-    priceFraction: '',
-    link: ''
+    titleSelector: '',
+    priceSelector: '',
+    linkSelector: ''
 });
 
 const resolver = ref(zodResolver(scraperConfigSchema));
