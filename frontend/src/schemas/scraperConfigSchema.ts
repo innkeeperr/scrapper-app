@@ -24,14 +24,4 @@ export const scraperConfigSchema = z.object({
   link: createFieldSchema({ required: false }), // optional
 })
 
-// export const scraperConfigSchema = z.object({
-//   baseUrl: z.string().min(1, { message: 'Base URL is required.' }),
-//   titleSelector: z.string().min(1, { message: 'Product title is required.' }),
-//   titleAttribute: z.string().optional(),
-//   priceSelector: z.string().min(1, { message: 'Price is required.' }),
-//   priceAttribute: z.string().optional(),
-//   linkSelector: z.string().optional(),
-//   linkAttribute: z.string().optional(),
-// })
-
 export type ScraperConfigSchemaType = Zod.infer<typeof scraperConfigSchema>

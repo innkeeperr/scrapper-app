@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"url\": \"https://www.amazon.pl/s?k=berserk+figure&__mk_pl_PL=%C3%85M%C3%85%C5%BD%C3%95%C3%91\"\r\n}",
+					"raw": "{\r\n  \"productConfigId\": \"68061ae1a80eddc26981e80b\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -42,7 +42,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"baseUrl\": \"https://test\",\r\n  \"itemList\": \".product-list-item\",\r\n  \"title\": \".product-title\",\r\n  \"price\": \".product-price\",\r\n  \"priceFraction\": \".price-fraction\",\r\n  \"link\": \".product-link\"\r\n}",
+					"raw": "{\r\n  \"baseUrl\": \"https://test\",\r\n  \"title\": {\r\n    \"selector\": \".product-title\",\r\n    \"attribute\": \"text\"\r\n  },\r\n  \"price\": {\r\n    \"selector\": \".product-price\",\r\n    \"attribute\": \"text\"\r\n  },\r\n  \"link\": {\r\n    \"selector\": \".product-link\",\r\n    \"attribute\": \"href\"\r\n  }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
