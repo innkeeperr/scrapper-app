@@ -1,21 +1,21 @@
 <template>
     <Form v-slot="$form" :initialValues :resolver @submit="onFormSubmit" class="flex flex-col gap-6 w-full">
-        <InputTextField label="base URL" name="baseUrl" :errorMessage="$form.baseUrl?.error?.message" :invalid="$form.baseUrl?.invalid" />
+        <InputTextField label="base URL" name="baseUrl" />
         <div class="flex flex-row w-full gap-2">
-            <InputTextField label="title selector" name="title.selector" :errorMessage="$form.title?.selector?.error?.message" :invalid="$form.title?.selector?.invalid" class="flex-2" />
-            <InputTextField label="title attribute" name="title.attribute" :errorMessage="$form.title?.attribute?.error?.message" :invalid="$form.title?.attribute?.invalid" class="flex-1" />
+                <InputTextField label="title selector" name="title.selector" class="flex-2" />
+            <InputTextField label="title attribute" name="title.attribute" class="flex-1" />
         </div>
 
         <div class="flex flex-row w-full gap-2">
-            <InputTextField label="price selector" name="price.selector" :errorMessage="$form.price?.selector?.error?.message" :invalid="$form.price?.selector?.invalid" class="flex-2" />
-            <InputTextField label="price attribute" name="price.attribute" :errorMessage="$form.price?.attribute?.error?.message" :invalid="$form.price?.attribute?.invalid" class="flex-1" /> 
+            <InputTextField label="price selector" name="price.selector" class="flex-2" />
+            <InputTextField label="price attribute" name="price.attribute" class="flex-1" /> 
         </div>
                    
         <div class="flex flex-row w-full gap-2">
-            <InputTextField label="link selector" name="link.selector" :errorMessage="$form.link?.selector?.error?.message" :invalid="$form.link?.selector?.invalid" class="flex-2" />
-            <InputTextField label="link attribute" name="link.attribute" :errorMessage="$form.link?.attribute?.error?.message" :invalid="$form.link?.attribute?.invalid" class="flex-1" />
+            <InputTextField label="link selector" name="link.selector" class="flex-2" />
+            <InputTextField label="link attribute" name="link.attribute" class="flex-1" />
         </div>
-        
+    
         <Button label="Submit" type="submit" />
     </Form>
 </template>
