@@ -28,20 +28,14 @@ import { scraperConfigApi } from '@/services/api/scraperConfigApi';
 import { scraperConfigSchema, type ScraperConfigSchemaType } from '@/schemas/scraperConfigSchema';
 import type { DynamicDialogInstance } from 'primevue/dynamicdialogoptions';
 
-const initialValues: ScraperConfigSchemaType = reactive({
-    baseUrl: '',
-    title: {
-        selector: '',
-        attribute: 'text'
-    },
-    price: {
-        selector: '',
-        attribute: 'text'
-    },
-    link: {
-        selector: '',
-        attribute: 'href'
-    }
+const initialValues = reactive({
+    'baseUrl': '',
+    'title.selector': '',
+    'title.attribute': 'text',
+    'price.selector': '',
+    'price.attribute': 'text',
+    'link.selector': '',
+    'link.attribute': 'href',
 });
 
 const resolver = ref(zodResolver(scraperConfigSchema));
