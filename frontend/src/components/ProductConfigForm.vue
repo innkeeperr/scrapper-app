@@ -1,9 +1,9 @@
 <template>
     <Form v-slot="$form" :initialValues :resolver @submit="onFormSubmit" class="flex flex-col gap-6 w-full">
         <AutocompleteField label="scraper config" name="scraperConfig" :items="items" :errorMessage="$form.scraperConfig?.error?.message" :invalid="$form.scraperConfig?.invalid" />
-        <InputTextField label="product url" name="searchUrl" :errorMessage="$form.searchUrl?.error?.message" :invalid="$form.searchUrl?.invalid" />
-        <InputTextField label="product name" name="productName" :errorMessage="$form.productName?.error?.message" :invalid="$form.productName?.invalid" />
-        <InputNumberField label="max price" name="maxPrice" :errorMessage="$form.maxPrice?.error?.message" :invalid="$form.maxPrice?.invalid" />
+        <InputTextField label="product url" name="searchUrl" />
+        <InputTextField label="product name" name="productName" />
+        <InputNumberField label="max price" name="maxPrice" />
         <Button label="Submit" type="submit" />
     </Form>
 </template>

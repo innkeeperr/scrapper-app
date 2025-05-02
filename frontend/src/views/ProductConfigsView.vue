@@ -34,11 +34,13 @@ const showAddForm = () => {
         props: {
             header: 'New product configuration',
             style: {
-                width: '25vw',
+                width: '35vw',
             },
             breakpoints:{
-                '960px': '75vw',
-                '640px': '90vw'
+                '1400px': '40vw',
+                '1200px': '50vw',
+                '1000px': '60vw',
+                '700px': '80vw',
             },
             modal: true
         },
