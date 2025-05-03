@@ -1,8 +1,12 @@
+const ProductConfig = require("../models/ProductConfig");
+const cheerio = require("cheerio");
+const axios = require("axios");
+
 const getValueFromElement = ($, element, fieldConfig) => {
-  const selectedElement = $(element).find(fieldConfig.selector);
+  const selectedElement = $(element).find(fieldConfig.selector).first();
 
   if (!selectedElement.length) {
-    console.warn(`Element not found for selector: ${fieldConfig.selector}`);
+    console.warn(`Element not found for selector: ${fieldConfig}`);
     return "";
   }
 
@@ -11,6 +15,16 @@ const getValueFromElement = ($, element, fieldConfig) => {
   } else {
     return selectedElement.attr(fieldConfig.attribute);
   }
+};
+
+const collectData = ($, scraperConfig) => {
+  const title = getValueFromElement($, $.root(), scraperConfig.title);
+  const price = getValueFromElement($, $.root(), scraperConfig.price);
+  const link = scraperConfig.link.selector
+    ? getValueFromElement($, $.root(), scraperConfig.link)
+    : "";
+
+  return { title, price, link };
 };
 
 exports.scrapeProduct = async (req, res) => {
@@ -28,7 +42,7 @@ exports.scrapeProduct = async (req, res) => {
       return;
     }
 
-    const response = await axios.get(url, {
+    const response = await axios.get(productConfig.searchUrl, {
       headers: {
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
@@ -37,28 +51,13 @@ exports.scrapeProduct = async (req, res) => {
     });
     const $ = cheerio.load(response.data);
 
-    const title = getValueFromElement(
+    const { title, price, link } = collectData(
       $,
-      $.root(),
-      productConfig.scraperConfigId.title
-    );
-    const price = getValueFromElement(
-      $,
-      $.root(),
-      productConfig.scraperConfigId.price
-    );
-    const priceFraction = getValueFromElement(
-      $,
-      $.root(),
-      productConfig.scraperConfigId.priceFraction
-    );
-    const link = getValueFromElement(
-      $,
-      $.root(),
-      productConfig.scraperConfigId.link
+      productConfig.scraperConfigId
     );
 
-    console.log({ title, price, priceFraction, link });
+    console.log({ title, price, link });
+    return res.status(201).json({ title, price, link });
   } catch (err) {
     console.error("[POST /scraper] Error:", err);
 
