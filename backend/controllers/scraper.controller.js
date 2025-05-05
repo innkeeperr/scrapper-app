@@ -70,3 +70,32 @@ exports.scrapeProduct = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+exports.testScraperConfiguration = async (req, res) => {
+  try {
+    const { exampleProductUrl, config } = req.body;
+
+    const response = await axios.get(exampleProductUrl, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+        "Accept-Language": "pl-PL,pl;q=0.9,en-US;q=0.8,en;q=0.7",
+      },
+    });
+    const $ = cheerio.load(response.data);
+
+    const { title, price, link } = collectData($, config);
+
+    return res.status(201).json({ title, price, link });
+  } catch (err) {
+    console.error("[POST /scraper] Error:", err);
+
+    if (err.name === "ValidationError") {
+      return res
+        .status(400)
+        .json({ message: "Validation error", errors: err.errors });
+    }
+
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
