@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"productConfigId\": \"68061ae1a80eddc26981e80b\"\r\n}",
+					"raw": "{\r\n  \"productConfigId\": \"6814988abde3105475812fd8\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/scrape",
+					"raw": "http://localhost:3000/api/scraper",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -29,7 +29,7 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"scrape"
+						"scraper"
 					]
 				}
 			},
@@ -128,6 +128,35 @@
 					"path": [
 						"api",
 						"product-config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test scraper configuration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"exampleProductUrl\": \"https://eu.gear.cdprojektred.com/products/cyberpunk-edgerunners-afterlife-oversized-mouse-pad\",\r\n  \"config\": {\r\n    \"title\": {\r\n        \"selector\": \".product__title h1\",\r\n        \"attribute\": \"text\"\r\n    },\r\n    \"price\": {\r\n        \"selector\": \".price-item\",\r\n        \"attribute\": \"text\"\r\n    },\r\n    \"link\": {\r\n        \"selector\": \"\",\r\n        \"attribute\": \"href\"\r\n    }\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/test-scraper-config",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"test-scraper-config"
 					]
 				}
 			},
