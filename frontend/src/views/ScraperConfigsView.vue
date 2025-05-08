@@ -7,10 +7,8 @@
         <Column field="baseUrl" header="Base URL"></Column>
         <Column field="title" header="Title"></Column>
         <Column field="createdAt" header="Created At"></Column>
-        <Column field="itemList" header="Item list"></Column>
         <Column field="link" header="Link"></Column>
         <Column field="price" header="Price"></Column>
-        <Column field="priceFraction" header="Price Fraction"></Column>
     </DataTable>
     <DynamicDialog />
  
