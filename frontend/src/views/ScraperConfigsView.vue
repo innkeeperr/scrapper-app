@@ -1,6 +1,6 @@
 <template>
-    <div class="mb-2">
-        <Button label="Add configuration" icon="pi pi-search" @click="showAddForm" />
+    <div class="pb-2">
+        <Button label="Add configuration" icon="pi pi-plus" @click="showAddForm" />
     </div>
     
     <DataTable :value="scraperConfigs" tableStyle="min-width: 50rem">
